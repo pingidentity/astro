@@ -77,6 +77,21 @@ const iconButtons = {
   modalHeaderCloseButton: {
     ...baseIconButton,
   },
+  datePicker: {
+    containedIcon: {
+      width: 28,
+      height: 28,
+      minWidth: 18,
+      right: 20,
+      px: 0,
+      py: 0,
+      border: 'none',
+      '&.is-hovered': {
+        backgroundColor: 'light',
+        path: { fill: astroTokensDark.color.gray[400] },
+      },
+    },
+  },
   messageCloseButton: {
     ...baseIconButton,
     '&.is-hovered': {

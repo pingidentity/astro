@@ -171,6 +171,52 @@ export const timeField = {
   },
 };
 
+export const datePicker = {
+  inSlotContainer: {
+    '&:after': {
+      display: 'none',
+    },
+    minWidth: '400px',
+  },
+  inputField: {
+    ...input,
+    color: 'font.base',
+    fontWeight: 0,
+    alignItems: 'center',
+    lineHeight: 'body',
+    width: '100%',
+    p: astroTokens.spacing.input['md-s'],
+    '&:focus-within:not(.is-read-only)': {
+      borderColor: 'focus',
+      boxShadow: 'none',
+      outline: '1px solid',
+      outlineColor: 'focus',
+      outlineOffset: '0px',
+    },
+    '&.is-read-only': {
+      border: '1px solid',
+      borderColor: 'border.input',
+      backgroundColor: astroTokens.color.input['readonly-bg'],
+      boxShadow: 'none',
+    },
+    '&.is-disabled': {
+      opacity: 1,
+      border: '1px solid',
+      borderColor: 'border.input',
+      backgroundColor: astroTokens.color.gray[100],
+      color: 'font.base',
+      boxShadow: 'none',
+    },
+  },
+  segment: {
+    color: 'font.base',
+    fontWeight: 0,
+    '&:empty': {
+      color: 'font.base',
+    },
+  },
+};
+
 export default {
   input,
   label,
@@ -185,4 +231,5 @@ export default {
   switch: switchable,
   numberField,
   timeField,
+  datePicker,
 };

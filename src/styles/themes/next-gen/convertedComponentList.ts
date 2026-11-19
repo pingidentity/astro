@@ -18,6 +18,7 @@ const nextGenConvertedComponents = [
   'ComboBoxField',
   'CopyText',
   'DataTable',
+  'DatePicker',
   'EnvironmentBreadcrumb',
   'GridList',
   'HelpHint',

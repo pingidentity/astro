@@ -3,6 +3,46 @@ import { astroTokensDark } from '@pingux/onyx-tokens';
 import comboBox from './comboBox';
 import { fieldControlWrapper, input } from './input';
 
+export const datePicker = {
+  inSlotContainer: {
+    minWidth: '400px',
+  },
+  inputField: {
+    ...input,
+    color: astroTokensDark.color.font.base,
+    width: '100%',
+    p: `${astroTokensDark.spacing.input['md-s']}px !important`,
+    pr: '44px !important',
+    '&:focus-within:not(.is-read-only)': {
+      borderColor: 'focus',
+      boxShadow: 'none',
+      outline: '1px solid',
+      outlineColor: 'focus',
+      outlineOffset: '0px',
+    },
+    '&.is-read-only': {
+      border: '1px solid',
+      borderColor: 'border.input',
+      backgroundColor: astroTokensDark.color.input['readonly-bg'],
+      boxShadow: 'none',
+    },
+    '&.is-disabled': {
+      opacity: 1,
+      border: '1px solid',
+      borderColor: 'border.input',
+      backgroundColor: 'disabled',
+      color: astroTokensDark.color.font.base,
+      boxShadow: 'none',
+    },
+  },
+  segment: {
+    color: astroTokensDark.color.font.base,
+    '&:empty': {
+      color: astroTokensDark.color.font.base,
+    },
+  },
+};
+
 export const select = {
   backgroundColor: 'backgroundBase',
   borderRadius: astroTokensDark.radius.input,
@@ -131,4 +171,5 @@ export default {
   switch: switchable,
   comboBox,
   numberField,
+  datePicker,
 };

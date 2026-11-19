@@ -107,6 +107,8 @@ const buttons = {
       containedIcon: {
         '&:not(.disabled):hover': {
           border: 'none',
+          backgroundColor: astroTokens.color.gray[100],
+          path: { fill: 'dark' },
         },
         '&:focus': {
           border: 'none',

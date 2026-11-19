@@ -1,11 +1,12 @@
 import React, { DOMAttributes, forwardRef, RefObject, useCallback } from 'react';
+import { CalendarDate } from '@internationalized/date';
 import { AriaCalendarCellProps, CalendarCellAria, useCalendarCell } from '@react-aria/calendar';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover, usePress } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { CalendarState } from '@react-stately/calendar';
 
-import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import { Box, TableCell } from '../../index';
 import { CalendarCellProps, FocusableElement } from '../../types';
 /**
@@ -23,6 +24,9 @@ const CalendarCell = forwardRef<HTMLDivElement, CalendarCellProps>((props, ref) 
   } = props;
 
   const cellRef = useLocalOrForwardRef<HTMLDivElement>(ref);
+
+  const { themeState } = useGetTheme();
+  const isOnyxTheme = themeState.isOnyx;
 
   const {
     cellProps,
@@ -74,15 +78,23 @@ const CalendarCell = forwardRef<HTMLDivElement, CalendarCellProps>((props, ref) 
     focusWithinProps,
   );
 
+  const isOutsideMonth = (date as unknown as CalendarDate).compare(state.visibleRange.start) < 0
+    || (date as unknown as CalendarDate).compare(state.visibleRange.end) > 0;
+
   const { classNames } = useStatusClasses(className, {
     isSelected,
     isExtreme: isDisabled,
-    isUnavailable,
+    isUnavailable:
+      isUnavailable
+      || (isOnyxTheme
+        && Boolean(state.minValue || state.maxValue)
+        && state.isInvalid(date as unknown as CalendarDate)),
     isPressed,
     isFocused: isFocusVisible,
     isHovered,
     isOutsideVisibleRange,
     isCompletelyDisabled: state.isDisabled,
+    isOutsideMonth,
   });
 
   return (

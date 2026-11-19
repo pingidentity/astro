@@ -41,6 +41,26 @@ This component requires these additional components:
   - **Row** — defines each data row (`<tr>`)
     - **Cell** — defines each data cell (`<td>`)
 
+### Styling state classes
+
+TableBase applies state classes to the row (`<tr>`), cell (`<td>`), and column header (`<th>`) elements so custom CSS or theme overrides can target specific states:
+
+| Class | Meaning |
+| ----- | ------- |
+| `is-selected` | The row is selected (selection mode is enabled). Applied to rows. |
+| `is-hovered` | The pointer is over the row. Applied to rows. |
+| `is-pressed` | The row is being pressed. Applied to rows. |
+| `is-disabled` | The row is disabled. Applied to rows. |
+| `is-focused` | The element has keyboard focus. Kept for backward compatibility; prefer `is-focus-visible` for new styles. Applied to rows, cells, column headers, and the column resizer. |
+| `is-focus-visible` | The element has keyboard focus. Applied to rows, cells, column headers, and the column resizer. |
+| `is-active-row` | The row was activated by mouse or touch. Applied to rows only when `onRowAction` is provided. |
+
+Notes:
+
+- `is-focused` and `is-focus-visible` are emitted only for keyboard focus — Tab into the table, arrow-key navigation, or focusing the column resizer. Mouse and touch interaction applies neither class, so styling away a click indicator cannot accidentally remove the keyboard focus ring.
+- `is-active-row` has no default styling. Use it to add a click indicator (such as a border or background) without affecting the keyboard focus ring. Pressing Enter on a focused row applies it as well, since the row was activated.
+- Focus classes are element-local: a row or cell gets `is-focused` / `is-focus-visible` only when that element itself receives keyboard focus, not when an interactive control inside a cell (such as an input or checkbox) is focused. The control shows its own focus indicator.
+
 ### Accessibility
 
 <AccessibilityTable keyboardRows={[

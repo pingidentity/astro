@@ -438,6 +438,7 @@ function Resizer<T>(props: ResizerProps<T>) {
 
   const { classNames } = useStatusClasses('resizer', {
     isFocused: isFocusVisible,
+    isFocusVisible,
     isResizing,
   });
 
@@ -494,6 +495,7 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
 
   const { classNames } = useStatusClasses(className, {
     isFocused: isFocusVisible,
+    isFocusVisible,
   });
 
   useHandleFocusRef(ref);
@@ -599,7 +601,15 @@ function TableRow<T>(props: TableRowProps<T>) {
     isSelected,
     isHovered,
     isPressed,
-    isFocused: isFocusVisible || !!isActiveRow,
+    // Keyboard focus only. Backward compatible: consumer CSS and library themes
+    // targeting `.is-focused` keep working unchanged.
+    isFocused: isFocusVisible,
+    // Keyboard-focus ring hook (useFocusRing). Absent on pointer activation so
+    // styling away a click ring cannot remove the keyboard focus indicator.
+    isFocusVisible,
+    // Mouse/touch activation of a row action. No default focus ring; consumers
+    // style `.is-active-row` for a click highlight.
+    isActiveRow,
     isDisabled,
     'has-actions': hasActions,
   });
@@ -637,6 +647,7 @@ function TableCell<T>(props: TableCellProps<T>) {
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
     isFocused: isFocusVisible,
+    isFocusVisible,
   });
 
   useHandleFocusRef(ref);
