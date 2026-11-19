@@ -175,6 +175,7 @@ export const colors = {
   text: {
     primary: astroTokensDark.color.font.base,
     secondary: astroTokensDark.color.font.light,
+    reverse: astroTokensDark.color.font.reverse,
     error: astroTokensDark.color.font.error,
     message: 'white',
     fieldHelper: astroTokensDark.color.gray[400],
@@ -190,8 +191,8 @@ export const colors = {
   badge,
   codeEditor,
   critical: {
-    bright: astroTokensDark.color.red[300],
-    dark: astroTokensDark.color.red[100],
+    bright: astroTokensDark.color.red[500],
+    dark: astroTokensDark.color.red[500],
   },
   common,
 };

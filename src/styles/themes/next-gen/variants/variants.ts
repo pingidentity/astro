@@ -14,6 +14,7 @@ import arrayField from './arrayField';
 import { avatar } from './avatar';
 import { box } from './box';
 import button, { defaultFocus } from './button';
+import calendar from './calendar';
 import callout from './callout';
 import { dataTable } from './dataTable';
 import environmentBreadcrumb from './environmentBreadcrumb';
@@ -513,6 +514,7 @@ export default {
   breadcrumb,
   box,
   buttonBar,
+  calendar,
   callout,
   checkboxFieldGroup,
   codeView,

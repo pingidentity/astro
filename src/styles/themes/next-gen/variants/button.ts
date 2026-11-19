@@ -655,6 +655,28 @@ const iconButtons = {
       },
     },
   },
+  datePicker: {
+    containedIcon: {
+      width: 28,
+      height: 28,
+      minWidth: 18,
+      right: 20,
+      px: 0,
+      py: 0,
+      border: 'none',
+      '&.is-disabled': {
+        opacity: 1,
+      },
+      '&.is-hovered': {
+        backgroundColor: astroTokens.color.gray[100],
+      },
+      '&.is-pressed': {
+        '.material-symbols-outlined': {
+          color: 'white',
+        },
+      },
+    },
+  },
 };
 
 const listBoxLink = {
