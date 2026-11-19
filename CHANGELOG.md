@@ -1,3 +1,13 @@
+## 2.246.1-alpha.0 (2026-11-19)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9249] remove white-on-hover sx override from HelpHint
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.246.0-alpha.0 (2026-11-19)
 
 ### 🚀 Features
