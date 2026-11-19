@@ -339,6 +339,7 @@ test('Arrow Up key should focus the next row', async () => {
   const headerButton = within(columnheader[0]).getByRole('button');
   expect(headerButton).toHaveFocus();
   expect(columnheader[0]).toHaveClass('is-focused');
+  expect(columnheader[0]).toHaveClass('is-focus-visible');
 });
 
 test('Arrow Right move the focus to next cell', async () => {
@@ -391,6 +392,93 @@ test('Arrow Left move the focus to next cell', async () => {
   fireEvent.keyDown(tableCells[0], { key: 'ArrowLeft' });
   fireEvent.keyUp(tableCells[0], { key: 'ArrowLeft' });
   expect(rows[1]).toHaveFocus();
+});
+
+test('Arrow Right from the focused row gives the focused cell is-focused and is-focus-visible', async () => {
+  getComponent();
+  const rows = screen.getAllByRole('row');
+  const tableCells = rows[1].querySelectorAll('td');
+
+  await userEvent.tab();
+  expect(rows[1]).toHaveFocus();
+
+  fireEvent.keyDown(rows[1], { key: 'ArrowRight' });
+  fireEvent.keyUp(rows[1], { key: 'ArrowRight' });
+  expect(tableCells[0]).toHaveFocus();
+  expect(tableCells[0]).toHaveClass('is-focused');
+  expect(tableCells[0]).toHaveClass('is-focus-visible');
+});
+
+describe('Row activation and focus classes', () => {
+  test('clicking a row of a table with onRowAction applies is-active-row but no focus classes', async () => {
+    const onRowAction = jest.fn();
+    getComponent({ onRowAction });
+    const rows = screen.getAllByRole('row');
+
+    expect(rows[1]).not.toHaveClass('is-active-row');
+    expect(rows[1]).not.toHaveClass('is-focused');
+    expect(rows[1]).not.toHaveClass('is-focus-visible');
+
+    await userEvent.click(rows[1]);
+
+    expect(onRowAction).toHaveBeenCalledWith('1');
+    expect(rows[1]).toHaveClass('is-active-row');
+    // Mouse activation must not carry the keyboard-focus classes so consumer CSS
+    // styling away the click ring cannot remove the keyboard focus indicator.
+    expect(rows[1]).not.toHaveClass('is-focused');
+    expect(rows[1]).not.toHaveClass('is-focus-visible');
+  });
+
+  test('tabbing into a table with onRowAction applies is-focused and is-focus-visible and no is-active-row', async () => {
+    getComponent({ onRowAction: jest.fn() });
+    const rows = screen.getAllByRole('row');
+
+    await userEvent.tab();
+    expect(rows[1]).toHaveFocus();
+    expect(rows[1]).toHaveClass('is-focused');
+    expect(rows[1]).toHaveClass('is-focus-visible');
+    expect(rows[1]).not.toHaveClass('is-active-row');
+  });
+
+  test('arrow navigation from a clicked row moves focus classes and clears is-active-row', async () => {
+    getComponent({ onRowAction: jest.fn() });
+    const rows = screen.getAllByRole('row');
+
+    await userEvent.click(rows[1]);
+    expect(rows[1]).toHaveClass('is-active-row');
+
+    fireEvent.keyDown(rows[1], { key: 'ArrowDown' });
+    fireEvent.keyUp(rows[1], { key: 'ArrowDown' });
+    expect(rows[2]).toHaveFocus();
+    expect(rows[2]).toHaveClass('is-focused');
+    expect(rows[2]).toHaveClass('is-focus-visible');
+
+    expect(rows[1]).not.toHaveClass('is-active-row');
+    expect(rows[1]).not.toHaveClass('is-focused');
+    expect(rows[1]).not.toHaveClass('is-focus-visible');
+  });
+
+  test('clicking the already-active row again removes is-active-row', async () => {
+    getComponent({ onRowAction: jest.fn() });
+    const rows = screen.getAllByRole('row');
+
+    await userEvent.click(rows[1]);
+    expect(rows[1]).toHaveClass('is-active-row');
+
+    await userEvent.click(rows[1]);
+    expect(rows[1]).not.toHaveClass('is-active-row');
+  });
+
+  test('selection-only click applies is-selected without any focus or active-row classes', async () => {
+    getComponent({ selectionMode: 'multiple' });
+    const rows = screen.getAllByRole('row');
+
+    await userEvent.click(rows[1]);
+    expect(rows[1]).toHaveClass('is-selected');
+    expect(rows[1]).not.toHaveClass('is-focused');
+    expect(rows[1]).not.toHaveClass('is-focus-visible');
+    expect(rows[1]).not.toHaveClass('is-active-row');
+  });
 });
 
 const renderWithLoadingState = (loadingState?: LoadingState) => render(
@@ -734,6 +822,35 @@ describe('Resizable columns', () => {
       fireEvent.keyDown(slider, { key: 'Escape' });
       fireEvent.keyDown(slider, { key: 'ArrowRight' });
       expect(onResize).not.toHaveBeenCalled();
+    });
+
+    test('keyboard focus on the resizer input gives the resizer wrapper is-focused and is-focus-visible', async () => {
+      getResizableWithCallbacks();
+
+      const columnheaders = screen.getAllByRole('columnheader');
+      const sortButton = within(columnheaders[0]).getByRole('button', { name: /Sort by Name/i });
+      const slider = within(columnheaders[0]).getByRole('slider', { name: /Name column width/i });
+      const rows = screen.getAllByRole('row');
+
+      // Reach the resizer the way a keyboard user does: Tab into the table,
+      // ArrowUp into the header's sort button, then ArrowRight to the resizer
+      // input. A bare slider.focus() is redirected by the collection's focus
+      // handler to the focused row, so the roving-tabindex path is required.
+      await userEvent.tab();
+      expect(rows[1]).toHaveFocus();
+
+      fireEvent.keyDown(rows[1], { key: 'ArrowUp' });
+      fireEvent.keyUp(rows[1], { key: 'ArrowUp' });
+      expect(sortButton).toHaveFocus();
+
+      fireEvent.keyDown(columnheaders[0], { key: 'ArrowRight' });
+      fireEvent.keyUp(columnheaders[0], { key: 'ArrowRight' });
+      expect(slider).toHaveFocus();
+
+      const resizerWrapper = slider.closest('.resizer');
+      expect(resizerWrapper).not.toBeNull();
+      expect(resizerWrapper).toHaveClass('is-focused');
+      expect(resizerWrapper).toHaveClass('is-focus-visible');
     });
   });
 });
