@@ -17,7 +17,7 @@ import { VisuallyHidden } from '@react-aria/visually-hidden';
 import type { DateSegment as DateSegmentType } from '@react-stately/datepicker';
 import { useDateFieldState } from '@react-stately/datepicker';
 
-import { useField, useStatusClasses } from '../../hooks';
+import { useField, useGetTheme, useStatusClasses } from '../../hooks';
 import { FieldControlInputProps, UseFieldProps } from '../../hooks/useField/useField';
 import {
   Box,
@@ -30,6 +30,7 @@ import {
 } from '../../index';
 import { DateFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
+import IconSymbol from '../Icon/IconSymbol';
 
 import DateSegment from './DateSegment';
 
@@ -68,6 +69,9 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>((props, ref) => {
   } = props;
 
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { themeState } = useGetTheme();
+  const isOnyxTheme = themeState.isOnyx;
 
   const fieldRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -166,12 +170,13 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>((props, ref) => {
    */
 
   const formatHelpText = useMemo(() => {
-    return (isLocalEnUS ? enUSSegments : segments)
+    const displaySegments = isLocalEnUS ? enUSSegments : segments;
+    return displaySegments
       .map(s => {
         return s.text;
       })
       .join(' ');
-  }, [hasFormatHelpText]);
+  }, [hasFormatHelpText, isLocalEnUS]);
 
   const handlePaste = useCallback(
     e => {
@@ -237,6 +242,7 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>((props, ref) => {
     <Box
       variant="forms.input.fieldContainer"
       {...fieldContainerProps}
+      className={classNames}
     >
       <Label
         {...fieldLabelProps}
@@ -291,15 +297,27 @@ const DateField = forwardRef<HTMLInputElement, DateFieldProps>((props, ref) => {
             {...buttonProps}
             aria-label={toggleCalendarButtonAriaLabel}
           >
-            <Icon
-              icon={CalendarIcon}
-              title={{ name: 'Calendar Icon' }}
-              size={20}
-            />
+            {isOnyxTheme
+              ? (
+                <IconSymbol
+                  icon="calendar_today"
+                  size={20}
+                  sx={{ flexShrink: 0 }}
+                  title={{ name: 'Calendar Icon' }}
+                />
+              )
+              : (
+                <Icon
+                  icon={CalendarIcon}
+                  title={{ name: 'Calendar Icon' }}
+                  size={20}
+                />
+              )}
           </IconButton>
         </Box>
       </Box>
       {hasFormatHelpText && <FieldHelperText>{formatHelpText}</FieldHelperText>}
+      {helperText && <FieldHelperText status={status}>{helperText}</FieldHelperText>}
       {errorMessage && (
         <Messages onClose={() => setErrorMessage('')}>
           <Item

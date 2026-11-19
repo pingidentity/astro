@@ -1,5 +1,5 @@
-import type { OverlayTriggerState } from 'react-stately';
 import type { AriaPopoverProps, Placement } from '@react-aria/overlays';
+import type { OverlayTriggerState } from '@react-stately/overlays';
 
 import { TestingAttributes } from './shared/test';
 import { DOMAttributes, Modify, StyleProps } from './shared';
@@ -32,7 +32,12 @@ export interface PopoverWrapperProps extends PopoverContainerProps {
 
 export interface PopoverProps extends Omit<AriaPopoverProps, 'popoverRef'> {
   children?: React.ReactNode;
-  state: OverlayTriggerState;
+  /**
+   * Structurally narrowed to the members Popover and usePopover consume, so any
+   * overlay state (DatePickerState, MenuTriggerState, ...) satisfies it regardless
+   * of which @react-stately/overlays copy the consumer's state came from.
+   */
+  state: Pick<OverlayTriggerState, 'isOpen' | 'setOpen' | 'open' | 'close' | 'toggle'>;
   direction?: PopoverPlacement
   className?: string;
   popoverRef?: React.RefObject<HTMLDivElement>;

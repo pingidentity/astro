@@ -4,6 +4,7 @@ import { colors } from '../colors';
 
 import { avatar } from './avatar';
 import { box } from './box';
+import calendar from './calendar';
 import callout from './callout';
 import { footer } from './footer';
 import iconBadge from './iconBadge';
@@ -242,6 +243,7 @@ export default {
       },
     },
   },
+  calendar,
   callout,
   table: {
     caption: {
@@ -320,7 +322,7 @@ export default {
         color: 'text.fieldHelper',
       },
       '&.is-error': {
-        color: 'critical.bright',
+        color: astroTokensDark.color.font.error,
       },
       '&.is-warning': {
         color: 'warning.bright',

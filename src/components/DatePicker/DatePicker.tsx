@@ -1,12 +1,14 @@
 import React, { forwardRef, useRef } from 'react';
 import { parseDate } from '@internationalized/date';
+import { astroTokens } from '@pingux/onyx-tokens';
 import { useDatePicker } from '@react-aria/datepicker';
 import { FocusScope } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import { useDatePickerState } from '@react-stately/datepicker';
 import { omit } from 'lodash/object';
 
-import { Calendar, FieldHelperText } from '../../index';
+import { useGetTheme } from '../../hooks';
+import { Calendar } from '../../index';
 import type { DatePickerProps, DateValue } from '../../types';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isDateWithinRanges } from '../../utils/devUtils/props/isDateWithinRanges';
@@ -49,6 +51,9 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, ref) =>
 
   const groupRef = useRef<HTMLElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
+
+  const { themeState } = useGetTheme();
+  const isOnyxTheme = themeState.isOnyx;
 
   /**
    *  This function is run against each date in the calendar
@@ -100,11 +105,14 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, ref) =>
       popoverRef={popoverRef}
       triggerRef={groupRef}
       state={state}
-      offset={15}
-      crossOffset={40}
+      offset={isOnyxTheme ? 1 : 15}
+      crossOffset={isOnyxTheme ? -45 : 40}
       data-testid="popover-container"
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      {...({ overflow: 'auto' } as any)}
+      style={
+        isOnyxTheme
+          ? { position: 'absolute', overflow: 'auto', borderRadius: astroTokens.radius.xl, maxWidth: '312px' }
+          : { position: 'absolute', overflow: 'auto' }
+      }
     >
       <FocusScope
         autoFocus
@@ -141,9 +149,6 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, ref) =>
         helpHintProps={helpHintProps}
       />
       {calendar}
-      {helperText && (
-        <FieldHelperText status={status}>{helperText}</FieldHelperText>
-      )}
     </>
   );
 });
